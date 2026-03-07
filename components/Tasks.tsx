@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import addNewTask from "@/actions/addNewTask"
 import editListTitle from "@/actions/editListTitle"
+import deleteList from "@/actions/deleteList"
 
 type Props = {
   list: any
@@ -57,6 +58,12 @@ export default function Tasks({ list, index, listId, tasks, boardId }: Props) {
 
     setListEditing(false)
     setInputValue("")
+
+    router.refresh()
+  }
+
+  async function deleteTheList() {
+    await deleteList(listId)
 
     router.refresh()
   }
@@ -132,11 +139,20 @@ export default function Tasks({ list, index, listId, tasks, boardId }: Props) {
           </div>
         </div>
       ) : (
-        <div
-          className="p-2 text-gray-700 bg-gray-200 hover:cursor-pointer transition-colors hover:bg-gray-300 rounded-2xl"
-          onClick={() => startCreatingNewTask(true)}
-        >
-          Add a New Task
+        <div className="flex justify-between items-center gap-3">
+          <div
+            className="p-2 text-gray-700 bg-gray-200 hover:cursor-pointer transition-colors hover:bg-gray-300 rounded-2xl"
+            onClick={() => startCreatingNewTask(true)}
+          >
+            Add a New Task
+          </div>
+
+          <div
+            className="p-2 text-gray-700 bg-gray-200 hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white rounded-2xl"
+            onClick={deleteTheList}
+          >
+            Delete List
+          </div>
         </div>
       )}
     </div>
