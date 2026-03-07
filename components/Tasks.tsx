@@ -5,16 +5,16 @@ import { useRouter } from "next/navigation"
 import addNewTask from "@/actions/addNewTask"
 import editListTitle from "@/actions/editListTitle"
 import deleteList from "@/actions/deleteList"
+import Task from "./Task"
 
 type Props = {
   list: any
-  index: any
   listId: any
   tasks: any
   boardId: any
 }
 
-export default function Tasks({ list, index, listId, tasks, boardId }: Props) {
+export default function Tasks({ list, listId, tasks, boardId }: Props) {
   const [newTask, setNewTask] = useState<boolean>(false)
   const [textareaValue, setTextareaValue] = useState<string>("")
   const [listEditing, setListEditing] = useState<boolean>(false)
@@ -71,7 +71,7 @@ export default function Tasks({ list, index, listId, tasks, boardId }: Props) {
   const listTasks = tasks.filter((task: any) => task.listId === list._id)
 
   return (
-    <div key={index} className="p-2 bg-gray-200 rounded-2xl text-gray-700 min-w-[250px] max-w-[250px] shadow-lg h-full">
+    <div className="p-2 bg-gray-200 rounded-2xl text-gray-700 min-w-[250px] max-w-[250px] shadow-lg h-full">
       {listEditing ? (
         <form
           onSubmit={(e: any) => changeListTitle(e)}
@@ -105,9 +105,7 @@ export default function Tasks({ list, index, listId, tasks, boardId }: Props) {
         {listTasks.map((task: any, index2: number) => {
           if (task.listId.toString() === list._id.toString()) {
             return (
-              <div key={index2} className="p-2 bg-white shadow-sm text-gray-700 rounded-2xl hover:cursor-pointer overflow-x-scroll hover:outline-2 hover:outline-blue-500">
-                {task.title}
-              </div>
+              <Task key={index2} task={task} />
             )
           }
         })}

@@ -39,7 +39,7 @@ export default function List({ lists, tasks, boardId }: Props) {
   return (
     <div className="p-2 flex gap-2">
       {lists.map((list: any, index: number) => (
-        <Tasks list={list} key={list._id} index={index} listId={list._id} tasks={tasks} boardId={boardId} />
+        <Tasks key={index} list={list} listId={list._id} tasks={tasks} boardId={boardId} />
       ))}
 
       {newList ? (
