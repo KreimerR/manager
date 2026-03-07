@@ -4,6 +4,8 @@ import { useState } from "react"
 import editTaskTitle from "@/actions/editTaskTitle"
 import { useRouter } from "next/navigation"
 import deleteTask from "@/actions/deleteTask"
+import markTaskAsCompleted from "@/actions/markTaskAsCompleted"
+import markTaskAsNotCompleted from "@/actions/markTaskAsNotCompleted"
 
 type Props = {
   task: any
@@ -45,15 +47,41 @@ export default function Task({ task }: Props) {
     router.refresh()
   }
 
+  async function markTheTaskAsCompleted() {
+    await markTaskAsCompleted(task._id)
+
+    setTaskEditing(false)
+
+    router.refresh()
+  }
+
+  async function markTheTaskAsNotCompleted() {
+    await markTaskAsNotCompleted(task._id)
+
+    setTaskEditing(false)
+
+    router.refresh()
+  }
+
   return (
     <div className="flex justify-between items-center p-2 bg-white shadow-sm text-gray-700 rounded-2xl hover:cursor-pointer hover:outline-2 hover:outline-blue-500 relative">
       {taskEditing ? (
         <div className="flex justify-between items-center w-full">
-          <button
-            className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-green-500 hover:text-white"
-          >
-            Done
-          </button>
+          {task.completed ? (
+            <button
+              className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-blue-500 hover:text-white"
+              onClick={markTheTaskAsNotCompleted}
+            >
+              Undone
+            </button>
+          ) : (
+            <button
+              className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-green-500 hover:text-white"
+              onClick={markTheTaskAsCompleted}
+            >
+              Done
+            </button>
+          )}
 
           <button
             className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white"
@@ -101,7 +129,7 @@ export default function Task({ task }: Props) {
           ) : (
             <>
               <p
-                className="max-w-[150px] overflow-x-scroll"
+                className={`max-w-[150px] overflow-x-scroll ${task.completed && "line-through"}`}
                 onClick={() => startEditingTaskTitle(true)}
               >
                 {task.title}
