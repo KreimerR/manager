@@ -9,4 +9,8 @@ export default async function deleteBoard(boardId: string) {
   const db = client.db("Manager")
 
   await db.collection("boards").findOneAndDelete({ _id: new ObjectId(boardId) })
+
+  await db.collection("lists").deleteMany({ boardId: new ObjectId(boardId) })
+
+  await db.collection("tasks").deleteMany({ boardId: new ObjectId(boardId) })
 }
