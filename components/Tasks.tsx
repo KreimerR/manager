@@ -71,7 +71,7 @@ export default function Tasks({ list, index, listId, tasks, boardId }: Props) {
   const listTasks = tasks.filter((task: any) => task.listId === list._id)
 
   return (
-    <div key={index} className="p-2 bg-gray-200 rounded-2xl text-gray-700 min-w-[250px] shadow-lg h-full">
+    <div key={index} className="p-2 bg-gray-200 rounded-2xl text-gray-700 min-w-[250px] max-w-[250px] shadow-lg h-full">
       {listEditing ? (
         <form
           onSubmit={(e: any) => changeListTitle(e)}
