@@ -64,7 +64,7 @@ export default function Task({ task }: Props) {
   }
 
   return (
-    <div className="flex justify-between items-center p-2 bg-white shadow-sm text-gray-700 rounded-2xl hover:cursor-pointer hover:outline-2 hover:outline-blue-500 relative">
+    <div className={`flex justify-between items-center p-2 ${task.completed ? "bg-gray-100" : "bg-white"} shadow-sm text-gray-700 rounded-2xl hover:cursor-pointer hover:outline-2 hover:outline-blue-500 relative`}>
       {taskEditing ? (
         <div className="flex justify-between items-center w-full">
           {task.completed ? (
@@ -76,7 +76,7 @@ export default function Task({ task }: Props) {
             </button>
           ) : (
             <button
-              className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-green-500 hover:text-white"
+              className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-blue-500 hover:text-white"
               onClick={markTheTaskAsCompleted}
             >
               Done
