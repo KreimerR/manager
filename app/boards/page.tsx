@@ -23,7 +23,7 @@ export default async function Boards() {
 
   return (
     <div className="flex justify-center">
-      <div className="w-[70vw]">
+      <div className="px-35">
         <h1 className="text-2xl font-bold py-5">My Boards:</h1>
 
         <RenderedBoards boards={boards} />
