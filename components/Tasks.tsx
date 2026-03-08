@@ -98,27 +98,29 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
           />
         </form>
       ) : (
-        <h1 className="px-2 font-[600]" onClick={() => startEditingListTitle(true)}>{list.title}</h1>
+        <h1 className="px-2 pb-2 font-[600]" onClick={() => startEditingListTitle(true)}>{list.title}</h1>
       )}
 
-      <div className="flex flex-col gap-2 py-2">
-        {listTasks.map((task: any, index2: number) => {
-          if (task.listId.toString() === list._id.toString()) {
-            return (
-              <Task key={index2} task={task} />
-            )
-          }
-        })}
-        {newTask && (
-          <textarea
-            name="textarea"
-            id="textarea"
-            placeholder="Enter a title"
-            className="p-2 bg-white text-gray-700 rounded-2xl shadow-lg resize-none"
-            onChange={(e: any) => setTextareaValue(e.target.value)}
-          />
-        )}
-      </div>
+      {listTasks.length !== 0 && (
+        <div className="flex flex-col gap-2 pb-2">
+          {listTasks.map((task: any, index2: number) => {
+            if (task.listId.toString() === list._id.toString()) {
+              return (
+                <Task key={index2} task={task} />
+              )
+            }
+          })}
+          {newTask && (
+            <textarea
+              name="textarea"
+              id="textarea"
+              placeholder="Enter a title"
+              className="p-2 bg-white text-gray-700 rounded-2xl shadow-lg resize-none"
+              onChange={(e: any) => setTextareaValue(e.target.value)}
+            />
+          )}
+        </div>
+      )}
 
       {newTask ? (
         <div className="w-full flex justify-between items-center">
