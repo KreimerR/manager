@@ -53,14 +53,14 @@ export default function List({ lists, tasks, boardId }: Props) {
 
           <div className="flex justify-between">
             <div
-              className="p-2 bg-blue-600 text-white hover:cursor-pointer transition-colors hover:bg-blue-700 rounded-2xl"
+              className="px-2 py-1 bg-blue-600 text-white hover:cursor-pointer transition-colors hover:bg-blue-700 rounded-2xl"
               onClick={createNewList}
             >
               Add list
             </div>
 
             <div
-              className="p-2 text-gray-700 hover:cursor-pointer transition-colors hover:text-gray-800 rounded-2xl"
+              className="px-2 py-1 text-gray-700 hover:cursor-pointer transition-colors hover:bg-gray-300 rounded-2xl"
               onClick={() => startCreatingNewList(false)}
             >
               Close

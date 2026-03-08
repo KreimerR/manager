@@ -16,7 +16,7 @@ type Props = {
 
 export default function Tasks({ list, listId, tasks, boardId }: Props) {
   const [newTask, setNewTask] = useState<boolean>(false)
-  const [textareaValue, setTextareaValue] = useState<string>("")
+  const [title, setTitle] = useState<string>("")
   const [listEditing, setListEditing] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>("")
 
@@ -25,10 +25,10 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
   function startCreatingNewTask(type: boolean) {
     if (type) {
       setNewTask(true)
-      setTextareaValue("")
+      setTitle("")
     } else if (!type) {
       setNewTask(false)
-      setTextareaValue("")
+      setTitle("")
     }
   }
 
@@ -43,10 +43,10 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
   }
 
   async function createNewTask() {
-    await addNewTask(boardId, listId, textareaValue)
+    await addNewTask(boardId, listId, title)
 
     setNewTask(false)
-    setTextareaValue("")
+    setTitle("")
 
     router.refresh()
   }
@@ -98,32 +98,29 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
           />
         </form>
       ) : (
-        <h1 className="px-2 pb-2 font-[600]" onClick={() => startEditingListTitle(true)}>{list.title}</h1>
+        <h1 className={`px-2 ${listTasks.length !== 0 && "pb-2"} font-[600]`} onClick={() => startEditingListTitle(true)}>{list.title}</h1>
       )}
 
-      {listTasks.length !== 0 && (
-        <div className="flex flex-col gap-2 pb-2">
-          {listTasks.map((task: any, index2: number) => {
-            if (task.listId.toString() === list._id.toString()) {
-              return (
-                <Task key={index2} task={task} />
-              )
-            }
-          })}
-          {newTask && (
-            <textarea
-              name="textarea"
-              id="textarea"
-              placeholder="Enter a title"
-              className="p-2 bg-white text-gray-700 rounded-2xl shadow-lg resize-none"
-              onChange={(e: any) => setTextareaValue(e.target.value)}
-            />
-          )}
-        </div>
-      )}
+      <div className="flex flex-col gap-2 p-1 max-h-[60vh] overflow-y-scroll">
+        {listTasks.map((task: any, index2: number) => {
+          if (task.listId.toString() === list._id.toString()) {
+            return (
+              <Task key={index2} task={task} />
+            )
+          }
+        })}
+        {newTask && (
+          <input
+            type="text"
+            placeholder="Enter a title"
+            className="p-2 bg-white text-gray-700 rounded-2xl shadow-lg resize-none"
+            onChange={(e: any) => setTitle(e.target.value)}
+          />
+        )}
+      </div>
 
       {newTask ? (
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center pt-2">
           <div
             className="p-2 bg-blue-500 text-white hover:cursor-pointer transition-colors hover:bg-blue-600 rounded-2xl"
             onClick={createNewTask}
@@ -139,7 +136,7 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
           </div>
         </div>
       ) : (
-        <div className="flex justify-between items-center gap-3">
+        <div className="flex justify-between items-center gap-3 pt-2">
           <div
             className="p-2 text-gray-700 bg-gray-200 hover:cursor-pointer transition-colors hover:bg-gray-300 rounded-2xl"
             onClick={() => startCreatingNewTask(true)}
