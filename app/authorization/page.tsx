@@ -1,11 +1,15 @@
-"use client"
+import LogIn from "@/components/LogIn"
+import { auth } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
-import { signIn } from "next-auth/react"
+export default async function Authorization() {
+  const session = await auth()
 
-export default function Authorization() {
-  return (
+  if (!session?.user) return (
     <div>
-      <button onClick={() => signIn("google")}>Sign in with Google</button>
+      <LogIn />
     </div>
   )
+
+  redirect("/boards")
 }
