@@ -59,7 +59,7 @@ export default async function Board({ params }: Props) {
   return (
     <div className="w-full h-[calc(100vh-56px)] p-2 overflow-y-hidden">
       <div style={{ backgroundImage: `url(${userBoardRaw.image})` }} className="bg-cover bg-center w-full h-full rounded-2xl">
-        <BoardInfo userBoard={userBoard} session={session} />
+        <BoardInfo userBoard={userBoard} />
 
         <div className="h-full overflow-x-scroll">
           <List lists={lists} tasks={tasks} boardId={boardId} />
