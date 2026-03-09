@@ -36,17 +36,18 @@ export default async function Board({ params }: Props) {
   }
 
   const listsRaw = await db.collection("lists").find({
-    boardId: new ObjectId(boardId)
+    boardId: new ObjectId(boardId),
   }).toArray()
 
   const lists = listsRaw.map((list: any) => ({
     ...list,
     _id: list._id.toString(),
     boardId: list.boardId.toString(),
+    userId: list.userId.toString(),
   }))
 
   const tasksRaw = await db.collection("tasks").find({
-    boardId: new ObjectId(boardId)
+    boardId: new ObjectId(boardId),
   }).toArray()
 
   const tasks = tasksRaw.map((task: any) => ({
@@ -54,6 +55,7 @@ export default async function Board({ params }: Props) {
     _id: task._id.toString(),
     listId: task.listId.toString(),
     boardId: task.boardId.toString(),
+    userId: task.userId.toString(),
   }))
 
   return (

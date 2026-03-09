@@ -4,6 +4,8 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import client from "./db"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: MongoDBAdapter(client),
+  adapter: MongoDBAdapter(client, {
+    databaseName: "Manager",
+  }),
   providers: [Google],
 })

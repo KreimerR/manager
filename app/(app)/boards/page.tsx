@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import client from "@/lib/db"
 import RenderedBoards from "@/components/RenderedBoards"
+import { ObjectId } from "mongodb"
 
 export default async function Boards() {
   const session = await auth()
@@ -13,12 +14,13 @@ export default async function Boards() {
   const db = client.db("Manager")
 
   const boardsRaw = await db.collection("boards").find({
-    userId: session.user.email
+    userId: new ObjectId(session.user.id)
   }).toArray()
 
   const boards = boardsRaw.map((board: any) => ({
     ...board,
     _id: board._id.toString(),
+    userId: board.userId.toString(),
   }))
 
   return (

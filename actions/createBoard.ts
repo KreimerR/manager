@@ -2,6 +2,7 @@
 
 import client from "@/lib/db"
 import { auth } from "@/lib/auth"
+import { ObjectId } from "mongodb"
 
 export default async function createBoard(background: string, title: string) {
   await client.connect()
@@ -10,20 +11,30 @@ export default async function createBoard(background: string, title: string) {
 
   const session = await auth()
 
-  if (!session?.user?.email) return console.log("Error")
+  if (!session?.user?.id) return console.log("Error")
 
   const result = await db.collection("boards").insertOne({
+    userId: new ObjectId(session.user.id),
     title: title,
     image: background,
-    userId: session.user.email,
   })
 
   const boardId = result.insertedId
 
   await db.collection("lists").insertMany([
-    { boardId, title: "To Do", order: 1 },
-    { boardId, title: "Doing", order: 2 },
-    { boardId, title: "Done", order: 3 },
+    {
+      boardId,
+      userId: new ObjectId(session.user.id),
+      title: "To Do",
+      order: 1,
+    },
+    {
+      boardId,
+      userId: new ObjectId(session.user.id),
+      title: "Doing",
+      order: 2,
+    },
+    { boardId, userId: new ObjectId(session.user.id), title: "Done", order: 3 },
   ])
 
   return boardId.toString()
