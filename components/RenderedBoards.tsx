@@ -36,7 +36,7 @@ export default function RenderedBoards({ boards }: Props) {
           className="p-2 bg-white rounded-2xl hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white"
           onClick={() => deleteTheBoard(el._id)}
         >
-          Delete Board
+          Delete
         </div>
       </div>
     </div>
