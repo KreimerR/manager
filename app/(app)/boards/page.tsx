@@ -9,6 +9,8 @@ export default async function Boards() {
 
   if (!session?.user) redirect("/authorization")
 
+  console.log("SESSION:", session)
+
   await client.connect()
 
   const db = client.db("Manager")
