@@ -67,12 +67,12 @@ export default function BoardInfo({ userBoard }: Props) {
       {editingTitle ? (
         <form
           onSubmit={(e: any) => editTitle(e)}
-          className="flex justify-between items-center gap-2 py-[2px]"
+          className="flex items-center gap-2 py-[2px]"
         >
           <input
             type="text"
             placeholder={userBoard.title} onChange={(e: any) => setInputValue(e.target.value)}
-            className="text-md font-bold bg-white rounded-lg px-2 z-10 text-gray-700"
+            className="text-md font-bold bg-white rounded-lg px-2 z-10 text-gray-700 w-[40%]"
           />
 
           <input
@@ -101,7 +101,7 @@ export default function BoardInfo({ userBoard }: Props) {
         className="px-2 bg-white font-[600] rounded-lg transition-colors hover:cursor-pointer hover:bg-gray-100 z-10"
         onClick={() => changingBackground ? startChangingBackground(false) : startChangingBackground(true)}
       >
-        Change background
+        Background
       </button>
 
       {changingBackground && (
