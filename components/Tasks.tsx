@@ -125,7 +125,7 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
             className="p-2 bg-blue-500 text-white hover:cursor-pointer transition-colors hover:bg-blue-600 rounded-2xl"
             onClick={createNewTask}
           >
-            Add New Task
+            Add Task
           </div>
 
           <div
@@ -141,7 +141,7 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
             className="p-2 text-gray-700 bg-gray-200 hover:cursor-pointer transition-colors hover:bg-gray-300 rounded-2xl"
             onClick={() => startCreatingNewTask(true)}
           >
-            Add a New Task
+            Add Task
           </div>
 
           <div
