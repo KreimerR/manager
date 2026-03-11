@@ -13,14 +13,9 @@ export default async function addNewList(boardId: any, title: string) {
 
   if (!session?.user?.id) return console.log("Error")
 
-  const listCount = await db.collection("tasks").countDocuments({
-    boardId: new ObjectId(boardId),
-  })
-
   await db.collection("lists").insertOne({
     boardId: new ObjectId(boardId),
     userId: new ObjectId(session.user.id),
     title: title,
-    order: listCount + 1,
   })
 }

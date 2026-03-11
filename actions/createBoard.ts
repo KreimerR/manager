@@ -26,15 +26,13 @@ export default async function createBoard(background: string, title: string) {
       boardId,
       userId: new ObjectId(session.user.id),
       title: "To Do",
-      order: 1,
     },
     {
       boardId,
       userId: new ObjectId(session.user.id),
       title: "Doing",
-      order: 2,
     },
-    { boardId, userId: new ObjectId(session.user.id), title: "Done", order: 3 },
+    { boardId, userId: new ObjectId(session.user.id), title: "Done" },
   ])
 
   return boardId.toString()

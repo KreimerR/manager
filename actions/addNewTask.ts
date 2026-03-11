@@ -17,16 +17,11 @@ export default async function addNewTask(
 
   if (!session?.user?.id) return console.log("Error")
 
-  const taskCount = await db.collection("tasks").countDocuments({
-    listId: new ObjectId(listId),
-  })
-
   await db.collection("tasks").insertOne({
     listId: new ObjectId(listId),
     boardId: new ObjectId(boardId),
     userId: new ObjectId(session.user.id),
     title,
     completed: false,
-    order: taskCount + 1,
   })
 }
