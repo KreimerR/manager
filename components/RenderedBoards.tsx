@@ -43,7 +43,7 @@ export default function RenderedBoards({ boards }: Props) {
   ))
 
   return (
-    <div className="grid grid-cols-[1fr_1fr_1fr_1fr] gap-x-3 gap-y-7">
+    <div className="grid grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-x-3 gap-y-7">
       {renderedBoards.length === 0 ? (
         <h1 className="font-bold text-lg w-[300px]">You do not have any boards yet.</h1>
       ) : (
