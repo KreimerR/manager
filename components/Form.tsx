@@ -42,14 +42,7 @@ export default function Form() {
   }
 
   return (
-    <div className="flex justify-between items-center gap-2">
-      <input
-        type="text"
-        placeholder="Search"
-        onChange={(e) => setValue(e.target.value)}
-        className="w-[50vw] outline-1 outline-gray-200 rounded-md px-3 py-1"
-      />
-
+    <div>
       {boardCreating ? (
         <div className="relative">
           <button
@@ -59,7 +52,7 @@ export default function Form() {
             Close
           </button>
 
-          <div className="absolute bottom-[-900%] left-0 bg-white rounded-2xl w-[300px] flex flex-col justify-center gap-5 p-2 z-20 shadow-2xl">
+          <div className="absolute bottom-[-900%] right-0 bg-white rounded-2xl w-[300px] flex flex-col justify-center gap-5 p-2 z-20 shadow-2xl">
             <span className="text-gray-700 text-center">Create board</span>
 
             <div className="flex flex-col gap-1 w-full">

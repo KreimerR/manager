@@ -12,8 +12,11 @@ export default async function Header() {
   return (
     <div className="flex justify-between align-center p-3 w-full bg-white">
       <Link href="/" className="font-lg font-[600]">Manager</Link>
-      <Form />
-      <Profile session={session} />
+
+      <div className="flex items-center gap-5">
+        <Form />
+        <Profile session={session} />
+      </div>
     </div>
   )
 }
