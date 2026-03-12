@@ -4,7 +4,7 @@ import client from "@/lib/db"
 import { ObjectId } from "mongodb"
 import { auth } from "@/lib/auth"
 
-export default async function addNewList(boardId: any, title: string) {
+export default async function addNewList(boardId: string, title: string) {
   await client.connect()
 
   const db = client.db("Manager")
