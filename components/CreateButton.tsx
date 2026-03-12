@@ -126,7 +126,7 @@ export default function CreateButton() {
               <input
                 type="text"
                 className="p-2 rounded-lg w-full outline-1 outline-gray-700"
-                onChange={(e: any) => setBoardTitle(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBoardTitle(e.target.value)}
               />
             </div>
 

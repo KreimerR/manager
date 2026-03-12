@@ -4,11 +4,12 @@ import Tasks from "./Tasks"
 import { useState } from "react"
 import addNewList from "@/actions/addNewList"
 import { useRouter } from "next/navigation"
+import type { ListType, TaskType } from "@/types"
 
 type Props = {
-  lists: any
-  tasks: any
-  boardId: any
+  lists: ListType[]
+  tasks: TaskType[]
+  boardId: string
 }
 
 export default function List({ lists, tasks, boardId }: Props) {
@@ -38,7 +39,7 @@ export default function List({ lists, tasks, boardId }: Props) {
 
   return (
     <div className="p-2 flex gap-2">
-      {lists.map((list: any, index: number) => (
+      {lists.map((list: ListType, index: number) => (
         <Tasks key={index} list={list} listId={list._id} tasks={tasks} boardId={boardId} />
       ))}
 
@@ -48,7 +49,7 @@ export default function List({ lists, tasks, boardId }: Props) {
             type="text"
             placeholder="Enter list name..."
             className="w-full p-2 text-gray-700 bg-white rounded-2xl"
-            onChange={(e: any) => setInputValue(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
           />
 
           <div className="flex justify-between">

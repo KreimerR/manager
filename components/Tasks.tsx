@@ -6,12 +6,13 @@ import addNewTask from "@/actions/addNewTask"
 import editListTitle from "@/actions/editListTitle"
 import deleteList from "@/actions/deleteList"
 import Task from "./Task"
+import type { ListType, TaskType } from "@/types"
 
 type Props = {
-  list: any
-  listId: any
-  tasks: any
-  boardId: any
+  list: ListType
+  listId: string
+  tasks: TaskType[]
+  boardId: string
 }
 
 export default function Tasks({ list, listId, tasks, boardId }: Props) {
@@ -51,7 +52,7 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
     router.refresh()
   }
 
-  async function changeListTitle(e: any) {
+  async function changeListTitle(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
 
     await editListTitle(listId, inputValue)
@@ -68,13 +69,13 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
     router.refresh()
   }
 
-  const listTasks = tasks.filter((task: any) => task.listId === list._id)
+  const listTasks = tasks.filter((task: TaskType) => task.listId === list._id)
 
   return (
     <div className="p-2 bg-gray-200 rounded-2xl text-gray-700 min-w-[250px] max-w-[250px] shadow-lg h-full">
       {listEditing ? (
         <form
-          onSubmit={(e: any) => changeListTitle(e)}
+          onSubmit={(e: React.SubmitEvent<HTMLFormElement>) => changeListTitle(e)}
           className="flex justify-between items-center gap-2"
         >
           <input
@@ -102,7 +103,7 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
       )}
 
       <div className="flex flex-col gap-2 p-1 max-h-[60vh] overflow-y-scroll">
-        {listTasks.map((task: any, index2: number) => {
+        {listTasks.map((task: TaskType, index2: number) => {
           if (task.listId.toString() === list._id.toString()) {
             return (
               <Task key={index2} task={task} />
@@ -114,7 +115,7 @@ export default function Tasks({ list, listId, tasks, boardId }: Props) {
             type="text"
             placeholder="Enter a title"
             className="p-2 bg-white text-gray-700 rounded-2xl shadow-lg resize-none"
-            onChange={(e: any) => setTitle(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
           />
         )}
       </div>

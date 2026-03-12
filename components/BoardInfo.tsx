@@ -42,7 +42,7 @@ export default function BoardInfo({ userBoard }: Props) {
     }
   }
 
-  async function editTitle(e: any) {
+  async function editTitle(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     await editBoardTitle(userBoard._id, inputValue)
@@ -66,12 +66,12 @@ export default function BoardInfo({ userBoard }: Props) {
     <div className="p-5 relative flex justify-between items-center gap-2">
       {editingTitle ? (
         <form
-          onSubmit={(e: any) => editTitle(e)}
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => editTitle(e)}
           className="flex items-center gap-2"
         >
           <input
             type="text"
-            placeholder={userBoard.title} onChange={(e: any) => setInputValue(e.target.value)}
+            placeholder={userBoard.title} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
             className="text-md font-bold bg-white rounded-lg px-2 z-10 text-gray-700 w-[40%]"
           />
 

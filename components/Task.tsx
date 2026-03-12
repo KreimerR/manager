@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation"
 import deleteTask from "@/actions/deleteTask"
 import markTaskAsCompleted from "@/actions/markTaskAsCompleted"
 import markTaskAsNotCompleted from "@/actions/markTaskAsNotCompleted"
+import type { TaskType } from "@/types"
 
 type Props = {
-  task: any
+  task: TaskType
 }
 
 export default function Task({ task }: Props) {
@@ -28,7 +29,7 @@ export default function Task({ task }: Props) {
     }
   }
 
-  async function editTheTaskTitle(e: any) {
+  async function editTheTaskTitle(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
 
     await editTaskTitle(task._id, newTaskTitle)
@@ -102,13 +103,13 @@ export default function Task({ task }: Props) {
           {taskTitleEditing ? (
             <form
               className="flex justify-between items-center w-full"
-              onSubmit={(e: any) => editTheTaskTitle(e)}
+              onSubmit={(e: React.SubmitEvent<HTMLFormElement>) => editTheTaskTitle(e)}
             >
               <input
                 type="text"
                 placeholder={task.title}
                 className="max-w-[80px] overflow-x-scroll rounded-lg"
-                onChange={(e: any) => setNewTaskTitle(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTaskTitle(e.target.value)}
               />
 
               <div className="flex items-center gap-1">
