@@ -15,6 +15,8 @@ type Props = {
 export default function List({ lists, tasks, boardId }: Props) {
   const [newList, setNewList] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>("")
+  const [chosenTask, setChosenTask] = useState<string>("")
+  const [taskMoving, setTaskMoving] = useState<boolean>(false)
 
   const router = useRouter()
 
@@ -40,7 +42,17 @@ export default function List({ lists, tasks, boardId }: Props) {
   return (
     <div className="p-2 flex gap-2">
       {lists.map((list: ListType, index: number) => (
-        <Tasks key={index} list={list} listId={list._id} tasks={tasks} boardId={boardId} />
+        <Tasks
+          key={index}
+          list={list}
+          listId={list._id}
+          tasks={tasks}
+          boardId={boardId}
+          chosenTask={chosenTask}
+          setChosenTask={setChosenTask}
+          taskMoving={taskMoving}
+          setTaskMoving={setTaskMoving}
+        />
       ))}
 
       {newList ? (

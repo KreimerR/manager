@@ -10,9 +10,12 @@ import type { TaskType } from "@/types"
 
 type Props = {
   task: TaskType
+  setChosenTask: React.Dispatch<React.SetStateAction<string>>
+  taskMoving: boolean
+  setTaskMoving: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function Task({ task }: Props) {
+export default function Task({ task, setChosenTask, taskMoving, setTaskMoving }: Props) {
   const [taskEditing, setTaskEditing] = useState<boolean>(false)
   const [taskTitleEditing, setTaskTitleEditing] = useState<boolean>(false)
   const [newTaskTitle, setNewTaskTitle] = useState<string>("")
@@ -64,39 +67,89 @@ export default function Task({ task }: Props) {
     router.refresh()
   }
 
+  function closeEditing() {
+    setTaskMoving(false)
+    setChosenTask("")
+    setTaskEditing(false)
+  }
+
+  function setTheChosenTask() {
+    setTaskMoving(true)
+    setChosenTask(task._id)
+  }
+
+  function stopSettingTheChosenTask() {
+    setTaskMoving(false)
+    setChosenTask("")
+  }
+
   return (
     <div className={`flex justify-between items-center p-2 ${task.completed ? "bg-gray-100" : "bg-white"} shadow-sm text-gray-700 rounded-2xl hover:cursor-pointer hover:outline-2 hover:outline-blue-500 relative`}>
       {taskEditing ? (
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between items-center gap-1 w-full">
           {task.completed ? (
             <button
-              className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-blue-500 hover:text-white"
+              className="py-1 px-1 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-blue-500 hover:text-white"
               onClick={markTheTaskAsNotCompleted}
             >
               Undone
             </button>
           ) : (
             <button
-              className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-blue-500 hover:text-white"
+              className="py-1 px-1 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-blue-500 hover:text-white"
               onClick={markTheTaskAsCompleted}
             >
               Done
             </button>
           )}
 
-          <button
-            className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white"
-            onClick={deleteTheTask}
-          >
-            Delete
-          </button>
+          {taskMoving ? (
+            <>
+              <button
+                className="py-1 px-1 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white"
+                onClick={deleteTheTask}
+              >
+                Delete
+              </button>
 
-          <button
-            className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-gray-200"
-            onClick={() => setTaskEditing(false)}
-          >
-            Close
-          </button>
+              <button
+                className="py-1 px-1 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+                onClick={stopSettingTheChosenTask}
+              >
+                Stop
+              </button>
+
+              <button
+                className="py-1 px-1 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+                onClick={closeEditing}
+              >
+                Close
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="py-1 px-1 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white"
+                onClick={deleteTheTask}
+              >
+                Delete
+              </button>
+
+              <button
+                className="py-1 px-1 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+                onClick={setTheChosenTask}
+              >
+                Move
+              </button>
+
+              <button
+                className="py-1 px-1 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+                onClick={() => setTaskEditing(false)}
+              >
+                Close
+              </button>
+            </>
+          )}
         </div>
       ) : (
         <>
@@ -116,13 +169,13 @@ export default function Task({ task }: Props) {
                 <input
                   type="submit"
                   value="Submit"
-                  className="py-1 px-2 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-gray-200"
+                  className="py-1 px-2 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
                 />
 
                 <input
                   type="button"
                   value="Close"
-                  className="py-1 px-2 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-gray-200"
+                  className="py-1 px-2 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
                   onClick={() => startEditingTaskTitle(false)}
                 />
               </div>
@@ -137,7 +190,7 @@ export default function Task({ task }: Props) {
               </p>
 
               <div
-                className="py-1 px-3 bg-gray-100 rounded-2xl hover:cursor-pointer transition-colors hover:bg-gray-200"
+                className="py-1 px-3 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
                 onClick={() => setTaskEditing(true)}
               >
                 Edit
