@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Manager
 
-## Getting Started
+Manager is a simple project and task management web application inspired by Trello.
+It allows users to organize boards, lists, and tasks in one place to manage projects and personal work efficiently.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Authentication
+
+- Google authentication using Auth.js
+- Secure user sessions
+- Account deletion
+
+### Boards
+
+- Create new boards
+- Choose board background images
+- Rename boards
+- Delete boards
+- View all boards belonging to the logged-in user
+
+### Lists
+
+- Create lists inside boards
+- Rename lists
+- Delete lists
+
+### Tasks
+
+- Add tasks to lists
+- Edit task titles
+- Move tasks between lists
+- Mark tasks as completed or not completed
+- Delete tasks
+
+### User Profile
+
+- Profile menu
+- Log out
+- Delete account
+
+## Tech Stack
+
+**Frontend**
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+**Backend**
+
+- Next.js Server Actions
+- MongoDB
+
+**Authentication**
+
+- Auth.js (NextAuth)
+- Google OAuth
+
+**Database**
+
+- MongoDB with MongoDB Adapter
+
+## Database Structure
+
+### users
+
+Managed automatically by Auth.js.
+
+### boards
+
+```
+{
+  _id: ObjectId,
+  userId: ObjectId
+  title: string,
+  image: string,
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### lists
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+{
+  _id: ObjectId,
+  boardId: ObjectId,
+  userId: ObjectId
+  title: string,
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### tasks
 
-## Learn More
+```
+{
+  _id: ObjectId,
+  listId: ObjectId,
+  boardId: ObjectId,
+  userId: ObjectId,
+  title: string,
+  completed: boolean
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Clone the repository
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+git clone https://github.com/KreimerR/manager.git
+cd manager
+```
 
-## Deploy on Vercel
+### 2. Install dependencies
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+npm install
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 3. Environment variables
+
+Create a `.env.local` file:
+
+```
+MONGODB_URI=your_mongodb_connection_string
+
+AUTH_SECRET=your_auth_secret
+
+AUTH_GOOGLE_ID=your_google_client_id
+AUTH_GOOGLE_SECRET=your_google_client_secret
+```
+
+## Running the project
+
+Development server:
+
+```
+npm run dev
+```
+
+The application will run at:
+
+```
+http://localhost:3000
+```
+
+## Screenshots
+
+<img src="./public/screenshots/1.png" alt="1">
+<img src="./public/screenshots/2.png" alt="2">
+<img src="./public/screenshots/3.png" alt="3">
+<img src="./public/screenshots/4.png" alt="4">
+<img src="./public/screenshots/5.png" alt="5">
+<img src="./public/screenshots/6.png" alt="6">
+<img src="./public/screenshots/7.png" alt="7">
+<img src="./public/screenshots/8.png" alt="8">
