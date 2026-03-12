@@ -63,11 +63,11 @@ export default function BoardInfo({ userBoard }: Props) {
   }
 
   return (
-    <div className="p-5 relative flex justify-between items-center">
+    <div className="p-5 relative flex justify-between items-center gap-2">
       {editingTitle ? (
         <form
           onSubmit={(e: any) => editTitle(e)}
-          className="flex items-center gap-2 py-[2px]"
+          className="flex items-center gap-2"
         >
           <input
             type="text"
@@ -90,7 +90,7 @@ export default function BoardInfo({ userBoard }: Props) {
         </form>
       ) : (
         <div
-          className="text-lg font-bold text-gray-700 bg-white rounded-lg px-2 z-10"
+          className="text-md font-bold text-gray-700 bg-white rounded-lg px-2 z-10"
           onClick={() => startEditingTitle(true)}
         >
           {userBoard.title}
