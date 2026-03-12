@@ -1,4 +1,4 @@
-import Form from "./Form"
+import CreateButton from "./CreateButton"
 import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
 import Link from "next/link"
@@ -14,7 +14,7 @@ export default async function Header() {
       <Link href="/" className="font-lg font-[600]">Manager</Link>
 
       <div className="flex items-center gap-5">
-        <Form />
+        <CreateButton />
         <Profile session={session} />
       </div>
     </div>
