@@ -8,4 +8,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     databaseName: "manager-project",
   }),
   providers: [Google],
+  trustHost: true,
 })
