@@ -33,7 +33,7 @@ export default function NewList() {
       </div>
     ) : (
       <button
-        className="p-2 bg-gray-200 rounded-2xl text-gray-700 font-[600] min-w-[250px] h-max shadow-lg opacity-70 hover:cursor-pointer transition-colors hover:bg-gray-300"
+        className="p-2 bg-gray-200 text-start rounded-2xl text-gray-700 font-[600] min-w-[250px] h-max shadow-lg opacity-70 hover:cursor-pointer transition-colors hover:bg-gray-300"
         onClick={listsLogic.startCreatingNewList}
       >
         Add another list
