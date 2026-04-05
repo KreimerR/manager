@@ -3,6 +3,8 @@
 Manager is a simple project and task management web application inspired by Trello.
 It allows users to organize boards, lists, and tasks in one place to manage projects and personal work efficiently.
 
+<img src="./public/authorization-banner.png">
+
 ## Features
 
 ### Authentication
