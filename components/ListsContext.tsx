@@ -1,8 +1,8 @@
 "use client"
 
 import { createContext, useContext, ReactNode } from "react"
-import { ListType, TaskType } from "@/types";
-import useLists from "@/hooks/useLists";
+import { ListType, TaskType } from "@/types"
+import useLists from "@/hooks/useLists"
 
 const ListsContext = createContext<any | null>(null)
 
@@ -23,7 +23,7 @@ export function ListsProvider({
     <ListsContext.Provider value={{ ...listsLogic, lists, tasks, boardId }}>
       {children}
     </ListsContext.Provider>
-  );
+  )
 }
 
 export function useListsContext() {
@@ -32,4 +32,4 @@ export function useListsContext() {
   if (!context) throw new Error("useListsContext must be used within ListsProvider")
 
   return context
-};
+}

@@ -9,13 +9,11 @@ export default async function addNewTask(
   listId: string,
   title: string,
 ) {
-  await client.connect()
-
   const db = client.db("manager-project")
 
   const session = await auth()
 
-  if (!session?.user?.id) return console.log("Error")
+  if (!session?.user?.id) throw new Error("Unauthorized")
 
   await db.collection("tasks").insertOne({
     listId: new ObjectId(listId),

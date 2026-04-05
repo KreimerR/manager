@@ -9,8 +9,6 @@ export default async function Boards() {
 
   if (!session?.user) redirect("/authorization")
 
-  await client.connect()
-
   const db = client.db("manager-project")
 
   const boardsRaw = await db.collection("boards").find({

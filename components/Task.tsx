@@ -1,6 +1,4 @@
-"use client"
-
-import { TaskProvider, useTaskContext } from "./TaskContext"
+import { TaskProvider } from "./TaskContext"
 import type { TaskType } from "@/types"
 import RenderedTask from "./RenderedTask"
 

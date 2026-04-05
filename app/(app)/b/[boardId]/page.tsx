@@ -13,8 +13,6 @@ export default async function Board({ params }: { params: Promise<{ boardId: str
 
   if (!session?.user?.image) throw new Error("Session Error")
 
-  await client.connect()
-
   const db = client.db("manager-project")
 
   const userBoardRaw = await db.collection("boards").findOne({

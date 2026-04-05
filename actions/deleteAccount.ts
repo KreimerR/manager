@@ -5,13 +5,11 @@ import { ObjectId } from "mongodb"
 import { auth } from "@/lib/auth"
 
 export default async function deleteAccount() {
-  await client.connect()
-
   const db = client.db("manager-project")
 
   const session = await auth()
 
-  if (!session?.user?.id) return console.log("Error")
+  if (!session?.user?.id) throw new Error("Unauthorized")
 
   await db.collection("users").deleteOne({ _id: new ObjectId(session.user.id) })
 

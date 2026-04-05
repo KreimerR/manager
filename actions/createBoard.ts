@@ -5,13 +5,11 @@ import { auth } from "@/lib/auth"
 import { ObjectId } from "mongodb"
 
 export default async function createBoard(background: string, title: string) {
-  await client.connect()
-
   const db = client.db("manager-project")
 
   const session = await auth()
 
-  if (!session?.user?.id) return console.log("Error")
+  if (!session?.user?.id) throw new Error("Unauthorized")
 
   const result = await db.collection("boards").insertOne({
     userId: new ObjectId(session.user.id),

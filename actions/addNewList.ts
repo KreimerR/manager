@@ -5,13 +5,11 @@ import { ObjectId } from "mongodb"
 import { auth } from "@/lib/auth"
 
 export default async function addNewList(boardId: string, title: string) {
-  await client.connect()
-
   const db = client.db("manager-project")
 
   const session = await auth()
 
-  if (!session?.user?.id) return console.log("Error")
+  if (!session?.user?.id) throw new Error("Unauthorized")
 
   await db.collection("lists").insertOne({
     boardId: new ObjectId(boardId),
