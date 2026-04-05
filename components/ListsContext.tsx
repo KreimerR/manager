@@ -1,8 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useCallback, ReactNode } from "react"
-// import { useRouter } from "next/navigation";
-// import addNewList from "@/actions/addNewList"
+import { createContext, useContext, ReactNode } from "react"
 import { ListType, TaskType } from "@/types";
 import useLists from "@/hooks/useLists";
 
