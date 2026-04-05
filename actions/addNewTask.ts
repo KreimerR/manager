@@ -11,7 +11,7 @@ export default async function addNewTask(
 ) {
   await client.connect()
 
-  const db = client.db("Manager")
+  const db = client.db("manager-project")
 
   const session = await auth()
 

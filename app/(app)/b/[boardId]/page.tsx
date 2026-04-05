@@ -2,32 +2,26 @@ import client from "@/lib/db"
 import { ObjectId } from "mongodb"
 import { auth } from "@/lib/auth"
 import BoardInfo from "@/components/BoardInfo"
-import List from "@/components/List"
+import Lists from "@/components/Lists"
 
-type Props = {
-  params: Promise<{
-    boardId: string
-  }>
-}
-
-export default async function Board({ params }: Props) {
+export default async function Board({ params }: { params: Promise<{ boardId: string }> }) {
   const { boardId } = await params
 
-  if (!boardId) return <h1>Board Id Error</h1>
+  if (!boardId) throw new Error("Board Id Error")
 
   const session = await auth()
 
-  if (!session?.user?.image) return <h1>Session Error</h1>
+  if (!session?.user?.image) throw new Error("Session Error")
 
   await client.connect()
 
-  const db = client.db("Manager")
+  const db = client.db("manager-project")
 
   const userBoardRaw = await db.collection("boards").findOne({
     _id: new ObjectId(boardId)
   })
 
-  if (!userBoardRaw) return <h1>User Board Error</h1>
+  if (!userBoardRaw) throw new Error("User Board Error")
 
   const userBoard = {
     ...userBoardRaw,
@@ -64,7 +58,7 @@ export default async function Board({ params }: Props) {
         <BoardInfo userBoard={userBoard} />
 
         <div className="h-full overflow-x-scroll">
-          <List lists={lists} tasks={tasks} boardId={boardId} />
+          <Lists lists={lists} tasks={tasks} boardId={boardId} />
         </div>
       </div>
     </div>

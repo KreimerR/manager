@@ -9,11 +9,9 @@ export default async function Boards() {
 
   if (!session?.user) redirect("/authorization")
 
-  console.log("SESSION:", session)
-
   await client.connect()
 
-  const db = client.db("Manager")
+  const db = client.db("manager-project")
 
   const boardsRaw = await db.collection("boards").find({
     userId: new ObjectId(session.user.id)
@@ -28,8 +26,7 @@ export default async function Boards() {
   return (
     <div className="flex justify-center">
       <div className="px-3 lg:px-35">
-        <h1 className="text-2xl font-bold py-5">My Boards:</h1>
-
+        <h1 className="text-2xl text-gray-700 font-bold py-5">My Boards:</h1>
         <RenderedBoards boards={boards} />
       </div>
     </div>

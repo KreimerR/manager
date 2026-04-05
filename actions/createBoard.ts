@@ -7,7 +7,7 @@ import { ObjectId } from "mongodb"
 export default async function createBoard(background: string, title: string) {
   await client.connect()
 
-  const db = client.db("Manager")
+  const db = client.db("manager-project")
 
   const session = await auth()
 

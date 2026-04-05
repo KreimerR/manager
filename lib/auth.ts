@@ -5,7 +5,7 @@ import client from "./db"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: MongoDBAdapter(client, {
-    databaseName: "Manager",
+    databaseName: "manager-project",
   }),
   providers: [Google],
 })

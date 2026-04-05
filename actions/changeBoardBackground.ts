@@ -9,7 +9,7 @@ export default async function changeBoardBackground(
 ) {
   await client.connect()
 
-  const db = client.db("Manager")
+  const db = client.db("manager-project")
 
   await db
     .collection("boards")

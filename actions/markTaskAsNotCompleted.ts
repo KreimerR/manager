@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb"
 export default async function markTaskAsNotCompleted(taskId: string) {
   await client.connect()
 
-  const db = client.db("Manager")
+  const db = client.db("manager-project")
 
   await db
     .collection("tasks")

@@ -7,7 +7,7 @@ import { auth } from "@/lib/auth"
 export default async function deleteAccount() {
   await client.connect()
 
-  const db = client.db("Manager")
+  const db = client.db("manager-project")
 
   const session = await auth()
 
