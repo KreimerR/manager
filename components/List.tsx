@@ -1,93 +1,18 @@
 "use client"
 
-import Tasks from "./Tasks"
-import { useState } from "react"
-import addNewList from "@/actions/addNewList"
-import { useRouter } from "next/navigation"
+import { useListsContext } from "./ListsContext"
+import { ListProvider } from "./ListContext"
 import type { ListType, TaskType } from "@/types"
+import RenderedList from "./RenderedList"
 
-type Props = {
-  lists: ListType[]
-  tasks: TaskType[]
-  boardId: string
-}
+export default function List({ list }: { list: ListType }) {
+  const listsLogic = useListsContext()
 
-export default function List({ lists, tasks, boardId }: Props) {
-  const [newList, setNewList] = useState<boolean>(false)
-  const [inputValue, setInputValue] = useState<string>("")
-  const [chosenTask, setChosenTask] = useState<string>("")
-  const [taskMoving, setTaskMoving] = useState<boolean>(false)
-
-  const router = useRouter()
-
-  function startCreatingNewList(value: boolean) {
-    if (value) {
-      setNewList(true)
-      setInputValue("")
-    } else {
-      setNewList(false)
-      setInputValue("")
-    }
-  }
-
-  async function createNewList() {
-    await addNewList(boardId, inputValue)
-
-    setNewList(false)
-    setInputValue("")
-
-    router.refresh()
-  }
+  const listTasks = listsLogic.tasks.filter((task: TaskType) => task.listId === list._id)
 
   return (
-    <div className="p-2 flex gap-2">
-      {lists.map((list: ListType, index: number) => (
-        <Tasks
-          key={index}
-          list={list}
-          listId={list._id}
-          tasks={tasks}
-          boardId={boardId}
-          chosenTask={chosenTask}
-          setChosenTask={setChosenTask}
-          taskMoving={taskMoving}
-          setTaskMoving={setTaskMoving}
-        />
-      ))}
-
-      {newList ? (
-        <div className="flex flex-col gap-2 p-2 bg-gray-200 rounded-2xl text-gray-700 font-[600] min-w-[250px] h-max shadow-lg">
-          <input
-            type="text"
-            placeholder="Enter list name..."
-            className="w-full p-2 text-gray-700 bg-white rounded-2xl"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
-          />
-
-          <div className="flex justify-between">
-            <div
-              className="px-2 py-1 bg-blue-600 text-white hover:cursor-pointer transition-colors hover:bg-blue-700 rounded-2xl"
-              onClick={createNewList}
-            >
-              Add list
-            </div>
-
-            <div
-              className="px-2 py-1 text-gray-700 hover:cursor-pointer transition-colors hover:bg-gray-300 rounded-2xl"
-              onClick={() => startCreatingNewList(false)}
-            >
-              Close
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div
-          className="p-2 bg-gray-200 rounded-2xl text-gray-700 font-[600] min-w-[250px] h-max shadow-lg opacity-70 hover:cursor-pointer transition-colors hover:bg-gray-300"
-          onClick={() => startCreatingNewList(true)}
-        >
-          Add another list
-        </div>
-      )}
-    </div>
+    <ListProvider list={list} listTasks={listTasks}>
+      <RenderedList list={list} />
+    </ListProvider>
   )
 }
