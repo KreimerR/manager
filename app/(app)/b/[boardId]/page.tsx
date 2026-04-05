@@ -53,7 +53,7 @@ export default async function Board({ params }: { params: Promise<{ boardId: str
   }))
 
   return (
-    <div className="w-full h-[calc(100vh-56px)] p-2 overflow-y-hidden">
+    <div className="w-full h-[calc(100vh-64px)] p-2 overflow-y-hidden">
       <div style={{ backgroundImage: `url(${userBoardRaw.image})` }} className="bg-cover bg-center w-full h-full rounded-2xl">
         <BoardInfo userBoard={userBoard} />
 
