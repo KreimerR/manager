@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import client from "@/lib/db"
 import RenderedBoards from "@/components/RenderedBoards"
 import { ObjectId } from "mongodb"
+import { BoardDocumentType, BoardType } from "@/types"
 
 export default async function Boards() {
   const session = await auth()
@@ -11,11 +12,11 @@ export default async function Boards() {
 
   const db = client.db("manager-project")
 
-  const boardsRaw = await db.collection("boards").find({
+  const boardsRaw = await db.collection<BoardDocumentType>("boards").find({
     userId: new ObjectId(session.user.id)
   }).toArray()
 
-  const boards = boardsRaw.map((board: any) => ({
+  const boards: BoardType[] = boardsRaw.map((board) => ({
     ...board,
     _id: board._id.toString(),
     userId: board.userId.toString(),

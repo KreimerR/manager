@@ -4,19 +4,15 @@ import { createContext, useContext, ReactNode } from "react"
 import { ListType, TaskType } from "@/types"
 import useLists from "@/hooks/useLists"
 
-const ListsContext = createContext<any | null>(null)
+type ListsContextType = ReturnType<typeof useLists> & {
+  lists: ListType[]
+  tasks: TaskType[]
+  boardId: string
+}
 
-export function ListsProvider({
-  lists,
-  tasks,
-  boardId,
-  children
-}: {
-  lists: ListType[],
-  tasks: TaskType[],
-  boardId: string,
-  children: ReactNode
-}) {
+const ListsContext = createContext<ListsContextType | null>(null)
+
+export function ListsProvider({ lists, tasks, boardId, children }: { lists: ListType[], tasks: TaskType[], boardId: string, children: ReactNode }) {
   const listsLogic = useLists()
 
   return (

@@ -1,10 +1,10 @@
 "use client"
 
 import useBoardInfo from "@/hooks/useBoardInfo"
-// import { BoardType } from "@/types"
+import { BoardType } from "@/types"
 import ChooseBackground from "./ChooseBackground"
 
-export default function BoardInfo({ userBoard }: { userBoard: any }) {
+export default function BoardInfo({ userBoard }: { userBoard: BoardType }) {
   const boardInfoLogic = useBoardInfo()
 
   return (

@@ -1,4 +1,28 @@
+import { ObjectId } from "mongodb"
 import { StaticImageData } from "next/image"
+
+export type BoardDocumentType = {
+  _id: ObjectId
+  userId: ObjectId
+  title: string
+  image: string
+}
+
+export type ListDocumentType = {
+  _id: ObjectId
+  boardId: ObjectId
+  userId: ObjectId
+  title: string
+}
+
+export type TaskDocumentType = {
+  _id: ObjectId
+  listId: ObjectId
+  boardId: ObjectId
+  userId: ObjectId
+  title: string
+  completed: boolean
+}
 
 export type BoardType = {
   _id: string

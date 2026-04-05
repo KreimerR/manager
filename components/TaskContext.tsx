@@ -4,7 +4,11 @@ import { createContext, ReactNode, useContext } from "react"
 import useTask from "@/hooks/useTask"
 import type { TaskType } from "@/types"
 
-const TaskContext = createContext<any | null>(null)
+type TaskContextType = ReturnType<typeof useTask> & {
+  task: TaskType
+}
+
+const TaskContext = createContext<TaskContextType | null>(null)
 
 export function TaskProvider({ task, children }: { task: TaskType, children: ReactNode }) {
   const taskLogic = useTask()

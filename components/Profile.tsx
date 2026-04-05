@@ -5,8 +5,11 @@ import { useState } from "react"
 import { signOut } from "next-auth/react"
 import deleteAccount from "@/actions/deleteAccount"
 import { useRouter } from "next/navigation"
+import type { Session } from "next-auth"
 
-export default function Profile({ session }: { session: any }) {
+export default function Profile({ session }: { session: Session }) {
+  if (!session?.user?.image) return null
+
   const [profileOpened, setProfileOpened] = useState<boolean>(false)
 
   const router = useRouter()

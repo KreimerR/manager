@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb"
 import { auth } from "@/lib/auth"
 import BoardInfo from "@/components/BoardInfo"
 import Lists from "@/components/Lists"
+import { BoardDocumentType, BoardType, ListDocumentType, ListType, TaskDocumentType, TaskType } from "@/types"
 
 export default async function Board({ params }: { params: Promise<{ boardId: string }> }) {
   const { boardId } = await params
@@ -15,34 +16,34 @@ export default async function Board({ params }: { params: Promise<{ boardId: str
 
   const db = client.db("manager-project")
 
-  const userBoardRaw = await db.collection("boards").findOne({
+  const userBoardRaw = await db.collection<BoardDocumentType>("boards").findOne({
     _id: new ObjectId(boardId)
   })
 
   if (!userBoardRaw) throw new Error("User Board Error")
 
-  const userBoard = {
+  const userBoard: BoardType = {
     ...userBoardRaw,
     _id: userBoardRaw._id.toString(),
     userId: userBoardRaw.userId?.toString()
   }
 
-  const listsRaw = await db.collection("lists").find({
+  const listsRaw = await db.collection<ListDocumentType>("lists").find({
     boardId: new ObjectId(boardId),
   }).toArray()
 
-  const lists = listsRaw.map((list: any) => ({
+  const lists: ListType[] = listsRaw.map((list: ListDocumentType) => ({
     ...list,
     _id: list._id.toString(),
     boardId: list.boardId.toString(),
     userId: list.userId.toString(),
   }))
 
-  const tasksRaw = await db.collection("tasks").find({
+  const tasksRaw = await db.collection<TaskDocumentType>("tasks").find({
     boardId: new ObjectId(boardId),
   }).toArray()
 
-  const tasks = tasksRaw.map((task: any) => ({
+  const tasks: TaskType[] = tasksRaw.map((task: TaskDocumentType) => ({
     ...task,
     _id: task._id.toString(),
     listId: task.listId.toString(),
