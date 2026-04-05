@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image"
+
 export type BoardType = {
   _id: string
   userId: string
@@ -19,4 +21,9 @@ export type TaskType = {
   userId: string
   title: string
   completed: boolean
+}
+
+export type BackgroundType = {
+  url: string
+  background: StaticImageData
 }
