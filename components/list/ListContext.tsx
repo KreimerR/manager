@@ -1,8 +1,8 @@
 "use client"
 
 import { createContext, useContext, ReactNode } from "react"
-import useList from "@/hooks/useList";
-import { ListType, TaskType } from "@/types";
+import useList from "@/hooks/useList"
+import { ListType, TaskType } from "@/types"
 
 type ListContextType = ReturnType<typeof useList> & {
   list: ListType
@@ -18,7 +18,7 @@ export function ListProvider({ list, listTasks, children }: { list: ListType, li
     <ListContext.Provider value={{ ...listLogic, list, listTasks }}>
       {children}
     </ListContext.Provider>
-  );
+  )
 }
 
 export function useListContext() {
@@ -27,4 +27,4 @@ export function useListContext() {
   if (!context) throw new Error("useListContext must be used within ListProvider")
 
   return context
-};
+}
