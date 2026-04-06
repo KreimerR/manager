@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import client from "@/lib/db"
-import RenderedBoards from "@/components/RenderedBoards"
+import RenderedBoards from "@/components/board/RenderedBoards"
 import { ObjectId } from "mongodb"
 import { BoardDocumentType, BoardType } from "@/types"
 

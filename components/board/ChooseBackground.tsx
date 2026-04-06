@@ -1,5 +1,5 @@
 import backgrounds from "@/data";
-import BackgroundOption from "./BackgroundOption";
+import BackgroundOption from "../BackgroundOption";
 import { BackgroundType } from "@/types";
 
 type Props = {

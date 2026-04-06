@@ -1,7 +1,7 @@
 "use client"
 
 import useCreateButton from "@/hooks/useCreateButton"
-import ChooseBackground from "./ChooseBackground"
+import ChooseBackground from "../board/ChooseBackground"
 
 export default function CreateButton() {
   const createButtonLogic = useCreateButton()

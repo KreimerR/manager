@@ -7,7 +7,7 @@ import ListInfo from "./ListInfo"
 import { useListsContext } from "./ListsContext"
 import ListTitle from "./ListTitle"
 import ListTitleEditing from "./ListTitleEditing"
-import Tasks from "./Tasks"
+import Tasks from "../task/Tasks"
 
 export default function RenderedList({ list }: { list: ListType }) {
   const listLogic = useListContext()

@@ -1,8 +1,8 @@
 import client from "@/lib/db"
 import { ObjectId } from "mongodb"
 import { auth } from "@/lib/auth"
-import BoardInfo from "@/components/BoardInfo"
-import Lists from "@/components/Lists"
+import BoardInfo from "@/components/board/BoardInfo"
+import Lists from "@/components/list/Lists"
 import { BoardDocumentType, BoardType, ListDocumentType, ListType, TaskDocumentType, TaskType } from "@/types"
 
 export default async function Board({ params }: { params: Promise<{ boardId: string }> }) {
