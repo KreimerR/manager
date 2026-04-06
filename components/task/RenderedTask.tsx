@@ -14,7 +14,7 @@ export default function RenderedTask() {
         ${taskLogic.task.completed
         ? "bg-gray-100"
         : "bg-white"} 
-        shadow-sm text-gray-700 rounded-2xl hover:cursor-pointer hover:outline-2 hover:outline-blue-500 relative
+        shadow-sm text-gray-700 rounded-2xl hover:cursor-pointer hover:outline-2 hover:outline-blue-500 relative h-[45px]
       `}
     >
       {taskLogic.taskEditing ? <TaskEditing /> : taskLogic.taskTitleEditing ? <TaskTitleEditing /> : <TaskInfo />}
