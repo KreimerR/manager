@@ -21,13 +21,13 @@ export default function TaskTitleEditing() {
         <input
           type="submit"
           value="Submit"
-          className="py-1 px-2 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+          className={`py-1 px-2 ${taskLogic.task.completed ? "bg-gray-200 hover:bg-gray-300" : "bg-gray-100 hover:bg-gray-200"} rounded-lg hover:cursor-pointer transition-colors`}
         />
 
         <input
           type="button"
           value="Close"
-          className="py-1 px-2 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+          className={`py-1 px-2 ${taskLogic.task.completed ? "bg-gray-200 hover:bg-gray-300" : "bg-gray-100 hover:bg-gray-200"} rounded-lg hover:cursor-pointer transition-colors`}
           onClick={taskLogic.stopEditingTaskTitle}
         />
       </div>

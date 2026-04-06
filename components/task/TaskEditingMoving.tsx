@@ -11,21 +11,21 @@ export default function TaskEditingMoving() {
     listsLogic.taskMoving ? (
       <>
         <button
-          className="py-1 px-1 text-sm bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white"
+          className={`py-1 px-1 text-sm ${taskLogic.task.completed ? "bg-gray-200" : "bg-gray-100"} rounded-lg hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white`}
           onClick={() => taskLogic.deleteTheTask(taskLogic.task)}
         >
           Delete
         </button>
 
         <button
-          className="py-1 px-1 text-sm bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+          className={`py-1 px-1 text-sm ${taskLogic.task.completed ? "bg-gray-200 hover:bg-gray-300" : "bg-gray-100 hover:bg-gray-200"} rounded-lg hover:cursor-pointer transition-colors`}
           onClick={() => taskLogic.stopSettingTheChosenTask(listsLogic.setTaskMoving, listsLogic.setChosenTask)}
         >
           Stop
         </button>
 
         <button
-          className="py-1 px-1 text-sm bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+          className={`py-1 px-1 text-sm ${taskLogic.task.completed ? "bg-gray-200 hover:bg-gray-300" : "bg-gray-100 hover:bg-gray-200"} rounded-lg hover:cursor-pointer transition-colors`}
           onClick={() => taskLogic.stopEditing(listsLogic.setTaskMoving, listsLogic.setChosenTask)}
         >
           Close
@@ -34,21 +34,21 @@ export default function TaskEditingMoving() {
     ) : (
       <>
         <button
-          className="py-1 px-1 text-sm bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white"
+          className={`py-1 px-1 text-sm ${taskLogic.task.completed ? "bg-gray-200" : "bg-gray-100"} rounded-lg hover:cursor-pointer transition-colors hover:bg-red-500 hover:text-white`}
           onClick={() => taskLogic.deleteTheTask(taskLogic.task)}
         >
           Delete
         </button>
 
         <button
-          className="py-1 px-1 text-sm bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+          className={`py-1 px-1 text-sm ${taskLogic.task.completed ? "bg-gray-200 hover:bg-gray-300" : "bg-gray-100 hover:bg-gray-200"} rounded-lg hover:cursor-pointer transition-colors`}
           onClick={() => taskLogic.setTheChosenTask(taskLogic.task, listsLogic.setTaskMoving, listsLogic.setChosenTask)}
         >
           Move
         </button>
 
         <button
-          className="py-1 px-1 text-sm bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+          className={`py-1 px-1 text-sm ${taskLogic.task.completed ? "bg-gray-200 hover:bg-gray-300" : "bg-gray-100 hover:bg-gray-200"} rounded-lg hover:cursor-pointer transition-colors`}
           onClick={() => taskLogic.setTaskEditing(false)}
         >
           Close

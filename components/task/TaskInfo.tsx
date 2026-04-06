@@ -15,7 +15,7 @@ export default function TaskInfo() {
       </p>
 
       <button
-        className="py-1 px-3 bg-gray-100 rounded-lg hover:cursor-pointer transition-colors hover:bg-gray-200"
+        className={`py-1 px-3 ${taskLogic.task.completed ? "bg-gray-200 hover:bg-gray-300" : "bg-gray-100 hover:bg-gray-200"} rounded-lg hover:cursor-pointer transition-colors`}
         onClick={() => taskLogic.setTaskEditing(true)}
       >
         Edit
